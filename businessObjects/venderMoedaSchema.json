@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "cryptoShortName": {
+        "type": "string"
+      },
+      "date": {
+        "type": "string"
+      },
+      "sellAmount": {
+        "type": "number"
+      },
+      "totalPriceReceive": {
+        "type": "integer"
+      },
+      "userId": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "id",
+      "cryptoShortName",
+      "date",
+      "sellAmount",
+      "totalPriceReceive",
+      "userId"
+    ]
+  }

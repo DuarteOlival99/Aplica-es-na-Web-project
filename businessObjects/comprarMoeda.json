@@ -1,0 +1,8 @@
+{
+    "id": 1, 
+    "cryptoShortName" : "BTC",
+    "date" : "20/04/2021",
+    "amount" : 0.5,
+    "totalPrice": 20000,
+    "userId": 1   
+}

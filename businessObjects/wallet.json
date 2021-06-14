@@ -1,0 +1,17 @@
+{
+    "userId": 1,
+    "moedasPossuidas" : 
+        [
+            {
+                "id": 1, 
+                "cryptoShortName" : "BTC",
+                "amount" : 0.5
+            }, 
+            {
+                "id": 2, 
+                "cryptoShortName" : "DOGE",
+                "amount" : 1
+            } 
+        ]
+}
+

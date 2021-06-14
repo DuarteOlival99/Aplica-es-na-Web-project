@@ -1,0 +1,2468 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Isto e a API para o projeto de AW, site de criptomoedas\n[http://swagger.io](http://swagger.io) or on \n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
+    "version": "1.0.0",
+    "title": "Site de criptomoedas",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/DuarteOlival99/Projeto_AW/1.0.0",
+  "tags": [
+    {
+      "name": "moedas",
+      "description": "tudo sobre as moedas"
+    },
+    {
+      "name": "comprar moedas",
+      "description": "tudo sobre comprar as moedas"
+    },
+    {
+      "name": "vender moedas",
+      "description": "tudo sobre vender as moedas"
+    },
+    {
+      "name": "confirmar transacoes",
+      "description": "confirmar transações de compra ou venda"
+    },
+    {
+      "name": "utilizador",
+      "description": "tudo sobre os utilizadores"
+    },
+    {
+      "name": "perfil",
+      "description": "tudo sobre a perfil"
+    },
+    {
+      "name": "wallet",
+      "description": "tudo sobre a wallet"
+    },
+    {
+      "name": "noticias",
+      "description": "tudo sobre as noticias"
+    },
+    {
+      "name": "publicacoes",
+      "description": "tudo sobre as publicacoes"
+    },
+    {
+      "name": "mensagens",
+      "description": "tudo sobre as mensagens"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/moedas": {
+      "get": {
+        "tags": [
+          "moedas"
+        ],
+        "summary": "Encontrar moedas",
+        "description": "Receber todas as moedas",
+        "operationId": "findMoedas",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Moeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "cryptocurrency_auth": [
+              "write:moedas",
+              "read:moedas"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "moedas"
+        ],
+        "summary": "Adicionar uma nova moeda",
+        "operationId": "addMoeda",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "moeda",
+            "description": "Moeda que seja preciso adicionar",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Moeda"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "cryptocurrency_auth": [
+              "write:moedas",
+              "read:moedas"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "moedas"
+        ],
+        "summary": "Atualizar uma moeda",
+        "operationId": "updateMoeda",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "moeda",
+            "description": "Moeda que seja preciso atualizar",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Moeda"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Moeda not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "security": [
+          {
+            "cryptocurrency_auth": [
+              "write:moedas",
+              "read:moedas"
+            ]
+          }
+        ]
+      }
+    },
+    "/moedas/{MoedaId}": {
+      "get": {
+        "tags": [
+          "moedas"
+        ],
+        "summary": "Procura Moeda por ID",
+        "description": "retorna uma simples moeda",
+        "operationId": "getMoedaById",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "MoedaId",
+            "in": "path",
+            "description": "ID da moeda para dar return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Moeda"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Moeda not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "moedas"
+        ],
+        "summary": "Atualiza uma moeda",
+        "operationId": "updateMoedaByID",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "MoedaId",
+            "in": "path",
+            "description": "Moeda id para atualizar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "cryptocurrency",
+            "in": "formData",
+            "description": "Atualiza a cryptocurrency da moeda",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "in": "formData",
+            "description": "Atualiza o value da moeda",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "lastUpdate",
+            "in": "formData",
+            "description": "Atualiza o lastUpdate da moeda",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "shortName",
+            "in": "formData",
+            "description": "Atualiza o shortName da moeda",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "cryptocurrency_auth": [
+              "write:moedas",
+              "read:moedas"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "moedas"
+        ],
+        "summary": "Apaga uma moeda",
+        "operationId": "deleteMoedaByID",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "MoedaId",
+            "in": "path",
+            "description": "Moeda id para apagar",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Moeda not found"
+          }
+        },
+        "security": [
+          {
+            "cryptocurrency_auth": [
+              "write:moedas",
+              "read:moedas"
+            ]
+          }
+        ]
+      }
+    },
+    "/confirm/transaction/venda/{details}": {
+      "put": {
+        "tags": [
+          "confirmar transacoes"
+        ],
+        "summary": "Receber ticket dos detalhes",
+        "operationId": "returnTicket",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "details",
+            "in": "path",
+            "description": "detalhes da trasação",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "retorna ticket da transação",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "detalhes inválidos"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/confirm/transaction/{ticket}": {
+      "put": {
+        "tags": [
+          "confirmar transacoes"
+        ],
+        "summary": "confirmar o ticket",
+        "operationId": "confirmTicket",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "ticket",
+            "in": "path",
+            "description": "ver ticket",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ticket correto"
+          },
+          "400": {
+            "description": "ticket inválido"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/comprarMoeda": {
+      "get": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Receber todas as compras de moedas",
+        "description": "Receber todas as compras de moedas",
+        "operationId": "findComprasMoedas",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComprarMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Criar compra de moeda",
+        "description": "Só pode ser efetuado pelo utilizador logado",
+        "operationId": "createCompra",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Criar objeto comprarMoeda",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComprarMoeda"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Compra confirmada"
+          }
+        }
+      }
+    },
+    "/comprarMoeda/userID/{userID}": {
+      "get": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Procura compra de moeda pelo user ID",
+        "description": "retorna uma lista de compras",
+        "operationId": "getComprasByUserId",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComprarMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Compra do user not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/comprarMoeda/cryptoShortName/{cryptoShortName}": {
+      "get": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Procura compra pelo short name da moeda",
+        "description": "retorna uma lista de compras",
+        "operationId": "getComprasByCryptoShortName",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "cryptoShortName",
+            "in": "path",
+            "description": "cryptoShortName que deseja ver as compras efetuadas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComprarMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Compra da cryptoShortName not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/comprarMoeda/date/{date}": {
+      "get": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Procura compra pela data",
+        "description": "retorna uma lista de compras",
+        "operationId": "getComprasByDate",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "description": "date que deseja ver as compras efetuadas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComprarMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Compra pela date not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/comprarMoeda/userID_date/{userID}/{date}": {
+      "get": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Procura compra pelo userId e data",
+        "description": "retorna uma lista de compras",
+        "operationId": "getComprasByuserIdDate",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "date que deseja ver as compras efetuadas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComprarMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Compra pelo user id e date not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/comprarMoeda/userID_cryptoShortName/{userID}/{cryptoShortName}": {
+      "get": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Procura compra pelo userId e cryptoShortName",
+        "description": "retorna uma lista de compras",
+        "operationId": "getComprasByuserIdcryptoShortName",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "cryptoShortName",
+            "in": "path",
+            "description": "cryptoShortName que deseja ver as compras efetuadas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComprarMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Compra pelo user id e cryptoShortName not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/comprarMoeda/cryptoShortName_date/{cryptoShortName}/{date}": {
+      "get": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Procura compra pela data e cryptoShortName",
+        "description": "retorna uma lista de compras",
+        "operationId": "getComprasBycryptoShortNameDate",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "cryptoShortName",
+            "in": "path",
+            "description": "cryptoShortName que deseja ver as compras efetuadas",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "data que deseja filtrar as compras",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComprarMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Compra pela data e cryptoShortName not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/comprarMoeda/userID_cryptoShortName_date/{userID}/{cryptoShortName}/{date}": {
+      "get": {
+        "tags": [
+          "comprar moedas"
+        ],
+        "summary": "Procura compra pelo short name da moeda",
+        "description": "retorna uma lista de compras",
+        "operationId": "getComprasByFiltros",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "cryptoShortName",
+            "in": "path",
+            "description": "cryptoShortName que deseja ver as compras efetuadas",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "data que deseja filtrar as compras",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ComprarMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Compra da cryptoShortName not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/venderMoeda": {
+      "get": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Receber todas as vendas de moedas",
+        "description": "Receber todas as vendas de moedas",
+        "operationId": "findVendasMoedas",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VenderMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Criar venda de moeda",
+        "description": "Só pode ser efetuado pelo utilizador logado",
+        "operationId": "createVenda",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Criar objeto venderMoeda",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VenderMoeda"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/venderMoeda/userID/{userID}": {
+      "get": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Procura venda de moeda pelo user ID",
+        "description": "retorna uma lista de vendas",
+        "operationId": "getVendasByUserId",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VenderMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venda do user not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/venderMoeda/cryptoShortName/{cryptoShortName}": {
+      "get": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Procura venda pelo short name da moeda",
+        "description": "retorna uma lista de vendas",
+        "operationId": "getVendasByCryptoShortName",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "cryptoShortName",
+            "in": "path",
+            "description": "cryptoShortName que deseja ver as compras efetuadas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VenderMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venda da cryptoShortName not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/venderMoeda/date/{date}": {
+      "get": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Procura venda pela data",
+        "description": "retorna uma lista de vendas",
+        "operationId": "getVendasByDate",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "description": "date que deseja ver as vendas efetuadas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VenderMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venda pela date not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/venderMoeda/userID_date/{userID}/{date}": {
+      "get": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Procura venda pelo userId e data",
+        "description": "retorna uma lista de vendas",
+        "operationId": "getVendasByuserIdDate",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "date que deseja ver as vendas efetuadas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VenderMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venda pelo user id e date not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/venderMoeda/userID_cryptoShortName/{userID}/{cryptoShortName}": {
+      "get": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Procura venda pelo userId e cryptoShortName",
+        "description": "retorna uma lista de vendas",
+        "operationId": "getVendasByuserIdcryptoShortName",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "cryptoShortName",
+            "in": "path",
+            "description": "cryptoShortName que deseja ver as vendas efetuadas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VenderMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venda pelo user id e cryptoShortName not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/venderMoeda/cryptoShortName_date/{cryptoShortName}/{date}": {
+      "get": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Procura venda pela data e cryptoShortName",
+        "description": "retorna uma lista de vendas",
+        "operationId": "getVendasBycryptoShortNameDate",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "cryptoShortName",
+            "in": "path",
+            "description": "cryptoShortName que deseja ver as vendas efetuadas",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "data que deseja filtrar as vendas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VenderMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venda pela data e cryptoShortName not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/venderMoeda/userID_cryptoShortName_date/{userID}/{cryptoShortName}/{date}": {
+      "get": {
+        "tags": [
+          "vender moedas"
+        ],
+        "summary": "Procura venda pelo short name da moeda",
+        "description": "retorna uma lista de vendas",
+        "operationId": "getVendasByFiltros",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userID",
+            "in": "path",
+            "description": "ID do user",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "cryptoShortName",
+            "in": "path",
+            "description": "cryptoShortName que deseja ver as vendas efetuadas",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "data que deseja filtrar as vendas",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VenderMoeda"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Venda da cryptoShortName not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/utilizador": {
+      "post": {
+        "tags": [
+          "utilizador"
+        ],
+        "summary": "Criar utilizador",
+        "description": "Só pode ser efetuado pelo utilizador logado",
+        "operationId": "createUtilizador",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created utilizador object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Utilizador"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/utilizador/{username}": {
+      "get": {
+        "tags": [
+          "utilizador"
+        ],
+        "summary": "Procura utilizador pelo nome",
+        "operationId": "getUtilizadorByName",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "O nome que precisa para ir buscar.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Utilizador"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "Utilizador not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "utilizador"
+        ],
+        "summary": "Atualiza utilizador",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "updateUtilizador",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "Nome necessário para atualizar",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Atualizar objeto utilizador",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Utilizador"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "utilizador"
+        ],
+        "summary": "Apagar utilizador",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "deleteUtilizador",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "Nome necessário para atualizar",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "utilizador not found"
+          }
+        }
+      }
+    },
+    "/perfil": {
+      "post": {
+        "tags": [
+          "perfil"
+        ],
+        "summary": "Criar perfil",
+        "description": "Só pode ser efetuado pelo utilizador logado",
+        "operationId": "createPerfil",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Criar objeto perfil",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Perfil"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/perfil/{perfilId}": {
+      "get": {
+        "tags": [
+          "perfil"
+        ],
+        "summary": "Procura perfil pelo seu ID",
+        "operationId": "getPerfilByID",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "perfilId",
+            "in": "path",
+            "description": "ID necessário para ir buscar o perfil",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Perfil"
+            }
+          },
+          "400": {
+            "description": "Invalid perfil supplied"
+          },
+          "404": {
+            "description": "Perfil not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "perfil"
+        ],
+        "summary": "Atualiza perfil",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "updatePerfil",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "perfilId",
+            "in": "path",
+            "description": "ID necessário para eliminar perfil",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Atualizar objeto perfil",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Perfil"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid perfil supplied"
+          },
+          "404": {
+            "description": "Perfil not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "perfil"
+        ],
+        "summary": "Apagar perfil",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "deletePerfil",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "perfilId",
+            "in": "path",
+            "description": "ID necessário para apagar perfil",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid perfil supplied"
+          },
+          "404": {
+            "description": "Perfil not found"
+          }
+        }
+      }
+    },
+    "/wallet": {
+      "post": {
+        "tags": [
+          "wallet"
+        ],
+        "summary": "Criar wallet",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "createWallet",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Criar objeto wallet",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Wallet"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/wallet/{userId}": {
+      "get": {
+        "tags": [
+          "wallet"
+        ],
+        "summary": "Procura wallet pelo User ID",
+        "operationId": "getWalletByUserID",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID necessário para ir buscar a wallet",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Wallet"
+            }
+          },
+          "400": {
+            "description": "Invalid wallet supplied"
+          },
+          "404": {
+            "description": "Wallet not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "wallet"
+        ],
+        "summary": "Atualiza wallet",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "updateWallet",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID necessário para eliminar a wallet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Atualizar objeto wallet",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Wallet"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid wallet supplied"
+          },
+          "404": {
+            "description": "Wallet not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "wallet"
+        ],
+        "summary": "Apagar wallet",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "deleteWallet",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID necessário para apagar wallet",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid wallet supplied"
+          },
+          "404": {
+            "description": "Wallet not found"
+          }
+        }
+      }
+    },
+    "/wallet/{userId}/{walletId}": {
+      "get": {
+        "tags": [
+          "wallet"
+        ],
+        "summary": "Procura moeda especifica na wallet",
+        "operationId": "getMoedaByWalletId",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID necessário para apagar wallet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletId",
+            "in": "path",
+            "description": "ID necessário para ir buscar a moeda a wallet",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Wallet"
+            }
+          },
+          "400": {
+            "description": "Invalid moeda supplied"
+          },
+          "404": {
+            "description": "Moeda not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "wallet"
+        ],
+        "summary": "Atualiza moeda especifica na wallet",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "updateMoedaNaWallet",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID necessário para apagar wallet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletId",
+            "in": "path",
+            "description": "ID necessário para eliminar a moeda na wallet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Atualizar objeto moeda na wallet",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Wallet"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid moeda supplied"
+          },
+          "404": {
+            "description": "Moeda not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "wallet"
+        ],
+        "summary": "Apagar moeda especifica na wallet",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "deleteMoedaNaWallet",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID necessário para apagar wallet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "walletId",
+            "in": "path",
+            "description": "ID necessário para apagar a moeda na wallet",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid moeda supplied"
+          },
+          "404": {
+            "description": "Moeda not found"
+          }
+        }
+      }
+    },
+    "/noticias": {
+      "get": {
+        "tags": [
+          "noticias"
+        ],
+        "summary": "Receber todas as noticias",
+        "description": "Receber todas as noticias",
+        "operationId": "findNoticias",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Noticias"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "noticias"
+        ],
+        "summary": "Criar noticia",
+        "description": "Só pode ser efetuado pelo utilizador logado",
+        "operationId": "createNoticia",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Criar objeto noticia",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Noticias"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/noticias/{noticiasId}": {
+      "get": {
+        "tags": [
+          "noticias"
+        ],
+        "summary": "Procura noticia pelo seu ID",
+        "operationId": "getNoticiaByID",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "noticiasId",
+            "in": "path",
+            "description": "ID necessário para ir buscar a noticia",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Noticias"
+            }
+          },
+          "400": {
+            "description": "Invalid noticia supplied"
+          },
+          "404": {
+            "description": "noticia not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "noticias"
+        ],
+        "summary": "Atualiza noticia",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "updateNoticia",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "noticiasId",
+            "in": "path",
+            "description": "ID necessário para eliminar noticia",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Atualizar objeto noticia",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Noticias"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid noticia supplied"
+          },
+          "404": {
+            "description": "Noticia not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "noticias"
+        ],
+        "summary": "Apagar noticia",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "deleteNoticia",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "noticiasId",
+            "in": "path",
+            "description": "ID necessário para apagar noticia",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid noticia supplied"
+          },
+          "404": {
+            "description": "noticia not found"
+          }
+        }
+      }
+    },
+    "/publicacoes": {
+      "get": {
+        "tags": [
+          "publicacoes"
+        ],
+        "summary": "Receber todas as publicacoes",
+        "description": "Receber todas as publicacoes",
+        "operationId": "findPublicacoes",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Publicacoes"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "publicacoes"
+        ],
+        "summary": "Criar publicação",
+        "description": "Só pode ser efetuado pelo utilizador logado",
+        "operationId": "createpublicacao",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Criar objeto publicacao",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Publicacoes"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/publicacoes/{publicacoesId}": {
+      "get": {
+        "tags": [
+          "publicacoes"
+        ],
+        "summary": "Procura publicações pelo seu ID",
+        "operationId": "getPublicacoesByID",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "publicacoesId",
+            "in": "path",
+            "description": "ID necessário para ir buscar a publicação",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Publicacoes"
+            }
+          },
+          "400": {
+            "description": "Invalid publicacao supplied"
+          },
+          "404": {
+            "description": "publicacao not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "publicacoes"
+        ],
+        "summary": "Atualiza publicação",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "updatepublicacao",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "publicacoesId",
+            "in": "path",
+            "description": "ID necessário para eliminar a publicação",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Atualizar objeto publicação",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Publicacoes"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid publicacao supplied"
+          },
+          "404": {
+            "description": "Publicacao not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "publicacoes"
+        ],
+        "summary": "Apagar publicacoes",
+        "description": "Só pode ser efetuado pelo utilizador logado.",
+        "operationId": "deletepublicacao",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "publicacoesId",
+            "in": "path",
+            "description": "ID necessário para apagar publicação",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid publicacao supplied"
+          },
+          "404": {
+            "description": "publicacao not found"
+          }
+        }
+      }
+    },
+    "/mensagens": {
+      "get": {
+        "tags": [
+          "mensagens"
+        ],
+        "summary": "Receber todas as mensagens",
+        "description": "Receber todas as mensagens",
+        "operationId": "findMensagem",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Mensagem"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "mensagens"
+        ],
+        "summary": "Criar mensagem",
+        "description": "Só pode ser efetuado pelo utilizador logado",
+        "operationId": "createMensagem",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Criar objeto mensagem",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Mensagem"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "cryptocurrency_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:moedas": "modify moedas",
+        "read:moedas": "read moedas"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Moeda": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cryptocurrency": {
+          "type": "string"
+        },
+        "shortName": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        },
+        "lastUpdate": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Moeda"
+      }
+    },
+    "ComprarMoeda": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cryptoShortName": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "integer"
+        },
+        "totalPrice": {
+          "type": "integer"
+        },
+        "userId": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "ComprarMoeda"
+      }
+    },
+    "VenderMoeda": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cryptoShortName": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "sellAmount": {
+          "type": "integer"
+        },
+        "totalPriceReceive": {
+          "type": "integer"
+        },
+        "userId": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "VenderMoeda"
+      }
+    },
+    "Noticias": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "publicationPhoto": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Noticias"
+      }
+    },
+    "Location": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Tag"
+      }
+    },
+    "Mensagem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "textmessage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Mensagem_textmessage"
+          }
+        }
+      },
+      "xml": {
+        "name": "Mensagem"
+      }
+    },
+    "Perfil": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/Location"
+        },
+        "about": {
+          "type": "string"
+        },
+        "message": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Perfil_message"
+          }
+        },
+        "publications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Perfil_publications"
+          }
+        }
+      },
+      "xml": {
+        "name": "Perfil"
+      }
+    },
+    "Publicacoes": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "photoUser": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "publicationPhoto": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "Publicacoes"
+      }
+    },
+    "Utilizador": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "perfilId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Wallet": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "moedasPossuidas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Wallet_moedasPossuidas"
+          }
+        }
+      },
+      "xml": {
+        "name": "Wallet"
+      }
+    },
+    "Mensagem_textmessage": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "Perfil_message": {
+      "type": "object",
+      "properties": {
+        "messagesID": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Perfil_publications": {
+      "type": "object",
+      "properties": {
+        "publicationsID": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Wallet_moedasPossuidas": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "cryptoShortName": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

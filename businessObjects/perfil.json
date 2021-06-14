@@ -1,0 +1,37 @@
+{
+  "id": 1,
+  "firstname": "Donald",
+  "lastname": "Trump",
+  "age": 74,
+  "gender": "male",
+  "birthday": "14/06/1946",
+  "phone": "987654321",
+  "photo":"eff60af78d1ded9d62fcff68f84370ee", 
+  "location": {
+    "city": "Lisboa",
+    "state": "PT"
+  }, 
+  "about":"alguma coisa sobre a pessoa", 
+  "messages": [
+    {
+      "messagesID": 1
+    }, 
+    {
+      "messagesID": 2
+    }, 
+    {
+      "messagesID": 3
+    },
+    {
+      "messagesID": 4
+    }
+  ],
+  "publications": [
+    {
+      "publicationsID": 1
+    },
+    {
+      "publicationsID": 5
+    }
+  ]
+}

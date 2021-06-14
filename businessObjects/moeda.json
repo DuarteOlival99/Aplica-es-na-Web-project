@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1, 
+        "cryptocurrency" : "Bitcoin",
+        "value": 6000,
+        "lastUpdate": "15/04/2021",
+        "shortName": "BTC"
+    }, 
+    {
+        "id": 2, 
+        "cryptocurrency" : "Dogecoin",
+        "value": 1,
+        "lastUpdate": "29/04/2021",
+        "shortName": "DOGE"
+    }
+]

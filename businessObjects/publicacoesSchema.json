@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "photoUser": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "publicationPhoto": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "firstname",
+    "lastname",
+    "photoUser",
+    "description",
+    "date",
+    "publicationPhoto"
+  ]
+}

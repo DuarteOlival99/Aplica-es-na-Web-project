@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "cryptocurrency": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        },
+        "lastUpdate": {
+          "type": "string"
+        },
+        "shortName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "cryptocurrency",
+        "value",
+        "lastUpdate",
+        "shortName"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "cryptocurrency": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        },
+        "lastUpdate": {
+          "type": "string"
+        },
+        "shortName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "cryptocurrency",
+        "value",
+        "lastUpdate",
+        "shortName"
+      ]
+    }
+  ]
+}
